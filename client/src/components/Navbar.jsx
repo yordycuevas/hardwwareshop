@@ -6,7 +6,7 @@ function Navbar() {
       <h1> Hardware Shop</h1>
       <ul>
         <li>
-          <Link to="/"> Home </Link>
+          <Link to="/"> Listado de clientes </Link>
         </li>
         <li>
           <Link to="/new"> Crear Cliente </Link>

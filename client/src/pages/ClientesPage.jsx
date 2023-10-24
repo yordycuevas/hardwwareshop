@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
-import { obtenerClientesRequest } from "../api/clientes.api.js";
+import { useEffect} from "react";
 import ClientesCard from "../components/ClientesCard.jsx";
+import { useClientes } from "../context/ClienteProvider.jsx";
 
 function ClientesPage() {
-
-  const [clientes, setClientes] = useState([]);
+  const { clientes, loadClientes } = useClientes();
 
   useEffect(() => {
-    async function loadClientes() {
-      const response = await obtenerClientesRequest();
-      setClientes(response.data);
+    loadClientes();
+  }, [loadClientes]);
+
+  function renderClientes() {
+    if (clientes.length === 0) {
+      return <p>No hay clientes agregados</p>;
     }
 
-    loadClientes();
-  }, []);
+    return clientes.map((cliente) => (
+      <ClientesCard cliente={cliente} key={cliente.clienteid} />
+    ));
+  }
 
   return (
     <>
       <h1>Listado de clientes</h1>
-      {clientes.map((cliente) =>
-       <ClientesCard cliente={cliente} key={cliente.clienteid}/>)}
+      {renderClientes()}
     </>
   );
 }

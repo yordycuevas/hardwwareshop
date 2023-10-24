@@ -1,9 +1,30 @@
 import { Form, Formik } from "formik";
-import { CrearClientesRequest } from "../api/clientes.api.js";
+import { useClientes } from "../context/ClienteProvider";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function CrearClientes() {
+  const { CrearCliente, EditarCliente } = useClientes();
+  const params = useParams();
+  
+
+
+  useEffect(() => {
+    const loadCliente = async () => {
+      if (params.clienteid) {
+        const cliente = await EditarCliente(params.clienteid);
+        console.log(cliente);
+      }
+    };
+    loadCliente();
+  }, [EditarCliente, params.clienteid]);
+
   return (
     <div>
+
+      <h1>{
+        params.clienteid ? "Editar Cliente" : "Crear Cliente"
+      }</h1>
       <Formik
         initialValues={{
           nombre: "",
@@ -15,13 +36,8 @@ function CrearClientes() {
         }}
         onSubmit={async (values, actions) => {
           console.log(values);
-          try {
-            const response = await CrearClientesRequest(values);
-            console.log(response);
-            actions.resetForm();
-          } catch (error) {
-            console.log(error);
-          }
+          CrearCliente(values);
+          actions.resetForm();
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
@@ -71,7 +87,9 @@ function CrearClientes() {
               value={values.email}
             />
 
-            <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Creando..." : "Crear cliente"}</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Creando..." : "Crear cliente"}
+            </button>
           </Form>
         )}
       </Formik>
