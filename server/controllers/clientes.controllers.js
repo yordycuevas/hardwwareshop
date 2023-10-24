@@ -6,7 +6,7 @@ export const getClientes = async (req, res) => {
     const [result] = await pool.query("SELECT * FROM  clientes");
 
     if (result.length === 0) {
-      return res.status(404).json({ message: "No hay clientes disponibles" });
+      return res.status(404).json({ message: `No hay clientes dispobibles`});
     }
 
     res.json(result);
