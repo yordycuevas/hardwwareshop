@@ -58,8 +58,8 @@ function CrearClientes() {
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
-          <Form onSubmit={handleSubmit} className="bg-yellow-300 max-w-md rounded-md p-4" >
-          <h1 className="text-4xl font-bold u text-center">{params.clienteid ? "Editar Cliente" : "Crear Cliente"}</h1>
+          <Form onSubmit={handleSubmit} className="bg-yellow-300 max-w-md rounded-md p-4 mt-12" >
+          <h1 className=" text-4xl font-bold u text-center">{params.clienteid ? "Editar Cliente" : "Crear Cliente"}</h1>
             <label className="block p-2" >Nombre</label>
             <input
               type="text"
