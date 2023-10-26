@@ -18,3 +18,7 @@ export const EditarClienteRequest = async (id) => {
   const response = await axios.get(`http://localhost:4000/clientes/${id}`);
   return response;
 };
+
+export const ActualizarClienteRequest = async (id, newFields) => {
+   await axios.put(`http://localhost:4000/clientes/${id}`, newFields)
+}

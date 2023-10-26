@@ -3,7 +3,8 @@ import {
   obtenerClientesRequest,
   EliminarClientesRequest,
   CrearClientesRequest,
-  EditarClienteRequest
+  EditarClienteRequest,
+  ActualizarClienteRequest,
 } from "../api/clientes.api";
 import { ClienteContext } from "./ClienteContext";
 import PropTypes from "prop-types";
@@ -30,34 +31,52 @@ export const ClienteContextProvider = ({ children }) => {
   const deleteClientes = async (clienteid) => {
     try {
       const response = await EliminarClientesRequest(clienteid);
-      setClientes(clientes.filter((cliente) => cliente.clienteid !== clienteid));
+      setClientes(
+        clientes.filter((cliente) => cliente.clienteid !== clienteid)
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-const CrearCliente =async(cliente) => {
-  try {
-    const response = await CrearClientesRequest(cliente);
-    return (response);
-  } catch (error) {
-    console.log(error);
-  }
-}
+  const CrearCliente = async (cliente) => {
+    try {
+      const response = await CrearClientesRequest(cliente);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const EditarCliente = async (clienteid) => {
+    try {
+      const response = await EditarClienteRequest(clienteid);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-const EditarCliente =async(clienteid) => {
-  try {
-    const response = await EditarClienteRequest(clienteid);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-}
+  const ActualizarCliente = async (clienteid, newFields) => {
+    try {
+      await ActualizarClienteRequest(clienteid, newFields);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <ClienteContext.Provider value={{ clientes, loadClientes, deleteClientes, CrearCliente, EditarCliente }}>
+    <ClienteContext.Provider
+      value={{
+        clientes,
+        loadClientes,
+        deleteClientes,
+        CrearCliente,
+        EditarCliente,
+        ActualizarCliente,
+      }}
+    >
       {children}
     </ClienteContext.Provider>
   );
