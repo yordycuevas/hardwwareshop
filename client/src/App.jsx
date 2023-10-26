@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import ClientesPage from "./pages/ClientesPage";
 import CrearClientes from "./pages/CrearClientes";
+import EmpleadosPage from "./pages/EmpleadosPage";
+import CrearEmpleados from "./pages/CrearEmpleado";
 import NotFound from "./pages/NotFound";
 import { ClienteContextProvider } from "./context/ClienteProvider";
+import { EmpleadoContextProvider } from "./context/EmpleadoProvider";
 
 import Navbar from "./components/Navbar";
 
@@ -12,12 +15,20 @@ function App() {
         <Navbar />
       <div className="container mx-auto py-4 px-12">
       <ClienteContextProvider>
+      <EmpleadoContextProvider>
+
         <Routes>
-          <Route path="/" element={<ClientesPage />} />
-          <Route path="/new" element={<CrearClientes />} />
+          <Route path="/clientes" element={<ClientesPage />} />
+          <Route path="/newCliente" element={<CrearClientes />} />
           <Route path="/edit/:clienteid" element={<CrearClientes />} />
+
+          <Route path="/empleados" element={<EmpleadosPage />} />
+          <Route path="/newEmpleado" element={<CrearEmpleados />} />
+          <Route path="/edit/:empleadoid" element={<CrearEmpleados />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </EmpleadoContextProvider>
       </ClienteContextProvider>
       </div>
     </div>

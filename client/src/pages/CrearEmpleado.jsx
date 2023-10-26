@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
-import { useClientes } from "../context/ClienteProvider";
+import { useEmpleado } from "../context/EmpleadoProvider";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function CrearClientes() {
-  const { CrearCliente, EditarCliente, ActualizarCliente } = useClientes();
-  const [cliente, setCliente] = useState({
+function CrearEmpleado() {
+  const { CrearEmpleado, EditarEmpleado, ActualizarEmpleado } = useEmpleado();
+  const [empleado, setEmpleado] = useState({
     nombre: "",
     apellido: "",
     dni: "",
@@ -17,37 +17,37 @@ function CrearClientes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadCliente = async () => {
-      if (params.clienteid) {
-        const cliente = await EditarCliente(params.clienteid);
-        setCliente({
-          nombre: cliente.data.nombre,
-          apellido: cliente.data.apellido,
-          dni: cliente.data.dni,
-          direccion: cliente.data.direccion,
-          telefono: cliente.data.telefono,
-          email: cliente.data.email,
+    const loadEmpleado = async () => {
+      if (params.empleadoid) {
+        const empleado = await EditarEmpleado(params.empleadoid);
+        setEmpleado({
+          nombre: empleado.data.nombre,
+          apellido: empleado.data.apellido,
+          dni: empleado.data.dni,
+          direccion: empleado.data.direccion,
+          telefono: empleado.data.telefono,
+          email: empleado.data.email,
         });
       }
     };
-    loadCliente();
-  }, [params.clienteid, EditarCliente]);
+    loadEmpleado();
+  }, [params.empleadoid, EditarEmpleado]);
 
   return (
     <div>
       
       <Formik
-        initialValues={cliente}
+        initialValues={empleado}
         enableReinitialize={true}
         onSubmit={async (values) => {
-          navigate("/clientes");
-          if (params.clienteid) {
-            await ActualizarCliente(params.clienteid, values);
+          navigate("/empleados");
+          if (params.empleadoid) {
+            await ActualizarEmpleado(params.empleadoid, values);
           } else {
-            await CrearCliente(values);
+            await CrearEmpleado(values);
           }
 
-          setCliente({
+          setEmpleado({
             nombre: "",
             apellido: "",
             dni: "",
@@ -59,7 +59,7 @@ function CrearClientes() {
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
           <Form onSubmit={handleSubmit} className="bg-yellow-300 max-w-md rounded-md p-4" >
-          <h1 className="text-4xl font-bold u text-center">{params.clienteid ? "Editar Cliente" : "Crear Cliente"}</h1>
+          <h1 className="text-4xl font-bold u text-center">{params.empleadoid ? "Editar empleado" : "Crear empleado"}</h1>
             <label className="block p-2" >Nombre</label>
             <input
               type="text"
@@ -125,4 +125,4 @@ function CrearClientes() {
   );
 }
 
-export default CrearClientes;
+export default CrearEmpleado;

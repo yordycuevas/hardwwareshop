@@ -8,10 +8,17 @@ function Navbar() {
       </Link>
       <ul className="flex gap-x-2">
         <li className="text-xl font-bold " >
-          <Link to="/" className="bg-teal-300 px-2 py-1 rounded-md "> Listado de clientes </Link>
+          <Link to="/clientes" className="bg-teal-300 px-2 py-1 rounded-md "> Listado de clientes </Link>
         </li>
         <li className="text-xl font-bold">
-          <Link to="/new" className="bg-teal-300 px-2 py-1 rounded-md "> Crear Cliente </Link>
+          <Link to="/newCliente" className="bg-teal-300 px-2 py-1 rounded-md "> Crear Cliente </Link>
+        </li>
+
+        <li className="text-xl font-bold " >
+          <Link to="/empleados" className="bg-yellow-300 px-2 py-1 rounded-md "> Listado de Empleados </Link>
+        </li>
+        <li className="text-xl font-bold">
+          <Link to="/newEmpleado" className="bg-yellow-300 px-2 py-1 rounded-md "> Crear Empleados </Link>
         </li>
       </ul>
     </div>
