@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { useEmpleado } from "../context/EmpleadoProvider";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function CrearEmpleado() {
@@ -118,6 +118,12 @@ function CrearEmpleado() {
             <button className=" bg-blue-600 px-2 py-2 text-white rounded-md font-medium w-full mt-4" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Creando..." : "Guardar"}
             </button>
+
+            {params.empleadoid && (
+              <Link to={`/editEmpleado/${params.empleadoid}`} className="mt-4 block text-center">
+                Editar
+              </Link>
+            )}
           </Form>
         )}
       </Formik>

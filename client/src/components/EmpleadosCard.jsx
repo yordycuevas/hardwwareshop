@@ -16,7 +16,7 @@ function EmpleadosCard({ empleado }) {
       <p>{empleado.telefono}</p>
       <p>{empleado.email}</p>
       <div className="flex gap-2 mt-4  ">
-      <button className="bg-blue-600 px-2 py-1 text-white rounded-md font-medium "  onClick={( ) => navigate(`/edit/${empleado.empleadoid}`)} >Editar</button>
+      <button className="bg-blue-600 px-2 py-1 text-white rounded-md font-medium "  onClick={( ) => navigate(`/editEmpleado/${empleado.empleadoid}`)} >Editar</button>
       <button className="bg-red-500 px-2 py-1 text-white rounded-md font-medium " onClick={() => deleteEmpleado(empleado.empleadoid)}>
         Eliminar
       </button>
