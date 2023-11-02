@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { useClientes } from "../context/ClienteProvider";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+// import Footer from "../components/Footer";
 
 function CrearClientes() {
   const { CrearCliente, EditarCliente, ActualizarCliente } = useClientes();
@@ -63,14 +64,16 @@ function CrearClientes() {
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
+          <div className=" " >
+
           <Form
             onSubmit={handleSubmit}
-            className="bg-yellow-300 max-w-md rounded-md p-4"
+            className="bg-yellow-300 max-w-md rounded-md p-12  mx-auto"
           >
             <h1 className="text-4xl font-bold u text-center">
               {params.id_cliente ? "Editar Cliente" : "Crear Cliente"}
             </h1>
-            <h2 className="  u text-center">
+            <h2 className="text-center">
               {params.id_cliente
                 ? "Solo edita los campos necesarios"
                 : "No olvides llenar todos los campos"}
@@ -191,8 +194,10 @@ function CrearClientes() {
               {isSubmitting ? "Creando..." : "Guardar"}
             </button>
           </Form>
+          </div>
         )}
       </Formik>
+      {/* <Footer /> */}
     </div>
   );
 }

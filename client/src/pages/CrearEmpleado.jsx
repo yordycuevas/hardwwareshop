@@ -68,7 +68,7 @@ function CrearEmpleado() {
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
           <Form
             onSubmit={handleSubmit}
-            className="bg-yellow-300 max-w-md rounded-md p-4"
+            className="bg-yellow-300 max-w-md rounded-md p-3 mx-auto"
           >
             <h1 className="text-4xl font-bold u text-center">
               {params.id_empleado ? "Editar empleado" : "Crear empleado"}

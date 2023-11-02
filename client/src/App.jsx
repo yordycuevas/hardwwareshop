@@ -4,14 +4,16 @@ import CrearClientes from "./pages/CrearClientes";
 import EmpleadosPage from "./pages/EmpleadosPage";
 import CrearEmpleados from "./pages/CrearEmpleado";
 import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 import { ClienteContextProvider } from "./context/ClienteProvider";
 import { EmpleadoContextProvider } from "./context/EmpleadoProvider";
+import "./index.css";
 
 import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className= "bg-zinc-900 h-screen">
+    <div className= "bg-zinc-900  h-full-screen">
         <Navbar />
       <div className="container mx-auto py-4 px-12">
       <ClienteContextProvider>
@@ -28,9 +30,11 @@ function App() {
           
           <Route path="*" element={<NotFound />} />
         </Routes>
+        
       </EmpleadoContextProvider>
       </ClienteContextProvider>
       </div>
+        <Footer />
     </div>
   );
 }

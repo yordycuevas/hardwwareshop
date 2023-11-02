@@ -3,9 +3,18 @@ import { useEmpleado } from "../context/EmpleadoProvider.jsx";
 import { MagicMotion } from "react-magic-motion";
 import { useNavigate } from "react-router-dom";
 
+function formatDateToSpanish(date) {
+  // Convierte la fecha al formato "día, mes año"
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(date).toLocaleDateString("es-ES", options);
+}
+
 function EmpleadosCard({ empleado }) {
   const { deleteEmpleado } = useEmpleado();
   const navigate = useNavigate();
+
+  const imagenUrl = "https://i.pinimg.com/564x/c4/27/b9/c427b9a35897b4791c82e29dcc0b6484.jpg";
+
 
   const sucursales = {
     1: "Sede principal - Bogotá",
@@ -16,18 +25,26 @@ function EmpleadosCard({ empleado }) {
   }
 
   return (
+    
     <MagicMotion>
       <div className="bg-yellow-200 rounded-md p-4">
-        <h2 className="text-2xl font-bold ">
+      <img
+          src={imagenUrl} 
+          alt={`${empleado.nombre} ${empleado.apellido}`}
+          className="mx-auto rounded-full border-4 border-white"
+          style={{ width: "200px", height: "200px" }}
+        />
+        <h2 className="text-4xl font-bold text-center p-4">
           {empleado.nombre} {empleado.apellido}
         </h2>
         <p>
           {empleado.tipo_documento} {empleado.numero_documento}
         </p>
-        <p>{empleado.fecha_nacimiento}</p>
-        <p>{empleado.tipo_contrato}</p>
-        <p>{empleado.direccion}</p>
-        <p>{empleado.telefono}</p>
+        
+        <p>Fecha de nacimiento: {formatDateToSpanish(empleado.fecha_nacimiento)}</p>
+        <p>Tipo de contrato: {empleado.tipo_contrato}</p>
+        <p>Dirección de residencia: {empleado.direccion}</p>
+        <p>Numero Celular:{empleado.telefono}</p>
         <p>{sucursales[empleado.id_sucursal]}</p>{" "}
 
         <div className="flex gap-2 mt-4  ">
