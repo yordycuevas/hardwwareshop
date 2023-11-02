@@ -11,12 +11,12 @@ const empleadosRoutes = Router();
 
 empleadosRoutes.get("/empleados", getEmpleados);
 
-empleadosRoutes.get("/empleados/:empleadoid", getEmpleado);
+empleadosRoutes.get("/empleados/:id_empleado", getEmpleado);
 
 empleadosRoutes.post("/empleados", createEmpleado);
 
-empleadosRoutes.put("/empleados/:empleadoid", updateEmpleado);
+empleadosRoutes.put("/empleados/:id_empleado", updateEmpleado);
 
-empleadosRoutes.delete("/empleados/:empleadoid", deleteEmpleado);
+empleadosRoutes.delete("/empleados/:id_empleado", deleteEmpleado);
 
 export default empleadosRoutes;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const obtenerEmpleadosRequest = async () => {
+export const robtenerEmpleadosRequest = async () => {
   const response = await axios.get("http://localhost:4000/empleados");
   return response;
 };

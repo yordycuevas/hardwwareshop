@@ -5,5 +5,5 @@ export const pool = createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database:'prueba_react'
+    database:'hardware_project'
 });

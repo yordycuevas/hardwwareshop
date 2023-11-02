@@ -18,13 +18,13 @@ export const getClientes = async (req, res) => {
 export const getCliente = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "SELECT * FROM clientes WHERE clienteid = ?",
-      [req.params.clienteid]
+      "SELECT * FROM clientes WHERE id_cliente = ?",
+      [req.params.id_cliente]
     );
     if (result.length === 0) {
       res
         .status(404)
-        .json({ message: `Cliente ${req.params.clienteid} no encontrado` });
+        .json({ message: `Cliente ${req.params.id_cliente} no encontrado` });
     }
     res.json(result[0]);
   } catch (error) {
@@ -34,9 +34,9 @@ export const getCliente = async (req, res) => {
 
 export const createCliente = async (req, res) => {
   try {
-    const { nombre, apellido, dni, direccion, telefono, email } = req.body;
+    const { nombre, apellido, tipo_documento, numero_documento, direccion, telefono, email, id_ciudad  } = req.body;
     // Check for null values
-    if (!nombre || !apellido || !dni || !direccion || !telefono || !email) {
+    if (!nombre || !apellido || !tipo_documento || !numero_documento || !direccion || !telefono || !email || !id_ciudad ) {
       return res
         .status(400)
         .json({ message: "Todos los campos son obligatorios" });
@@ -44,19 +44,23 @@ export const createCliente = async (req, res) => {
     const [result] = await pool.query("INSERT INTO clientes SET ?", {
       nombre,
       apellido,
-      dni,
+      tipo_documento,
+      numero_documento,
       direccion,
       telefono,
       email,
+      id_ciudad
     });
     res.json({
-      clienteid: result.insertId,
+      id_cliente: result.insertId,
       nombre,
       apellido,
-      dni,
+      tipo_documento,
+      numero_documento,
       direccion,
       telefono,
       email,
+      id_ciudad
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -66,8 +70,8 @@ export const createCliente = async (req, res) => {
 export const updateCliente = async (req, res) => {
   try {
     const [rows] = await pool.query(
-      "SELECT * FROM clientes WHERE clienteid = ?",
-      [req.params.clienteid]
+      "SELECT * FROM clientes WHERE id_cliente = ?",
+      [req.params.id_cliente]
     );
 
     // Check if client exists
@@ -76,8 +80,8 @@ export const updateCliente = async (req, res) => {
     }
 
     const result = await pool.query(
-      "UPDATE clientes SET ? WHERE clienteid = ?",
-      [req.body, req.params.clienteid]
+      "UPDATE clientes SET ? WHERE id_cliente = ?",
+      [req.body, req.params.id_cliente]
     );
     res.json(result);
   } catch (error) {
@@ -88,15 +92,15 @@ export const updateCliente = async (req, res) => {
 export const deleteCliente = async (req, res) => {
   try {
     const [result] = await pool.query(
-      "DELETE FROM clientes WHERE clienteid = ?",
-      [req.params.clienteid]
+      "DELETE FROM clientes WHERE id_cliente = ?",
+      [req.params.id_cliente]
     );
     if (result.affectedRows === 0) {
       res
         .status(404)
-        .json({ message: `Cliente ${req.params.clienteid} no encontrado` });
+        .json({ message: `Cliente ${req.params.id_cliente} no encontrado` });
     }
-    res.json({ message: `Cliente ${req.params.clienteid} eliminado` });
+    res.json({ message: `Cliente ${req.params.id_cliente} eliminado` });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

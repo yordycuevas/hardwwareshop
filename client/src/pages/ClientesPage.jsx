@@ -15,7 +15,7 @@ function ClientesPage() {
     }
 
     return clientes.map((cliente) => (
-      <ClientesCard cliente={cliente} key={cliente.clienteid} />
+      <ClientesCard cliente={cliente} key={cliente.id_cliente} />
     ));
   }
 

@@ -20,11 +20,11 @@ function App() {
         <Routes>
           <Route path="/clientes" element={<ClientesPage />} />
           <Route path="/newCliente" element={<CrearClientes />} />
-          <Route path="/editCliente/:clienteid" element={<CrearClientes />} />
+          <Route path="/editCliente/:id_cliente" element={<CrearClientes />} />
 
           <Route path="/empleados" element={<EmpleadosPage />} />
           <Route path="/newEmpleado" element={<CrearEmpleados />} />
-          <Route path="/editEmpleado/:empleadoid" element={<CrearEmpleados />} />
+          <Route path="/editEmpleado/:id_empleado" element={<CrearEmpleados />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

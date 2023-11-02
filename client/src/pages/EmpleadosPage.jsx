@@ -15,7 +15,7 @@ function EmpleadosPage() {
     }
 
     return empleados.map((empleado) => (
-      <EmpleadosCard empleado={empleado} key={empleado.empleadoid} />
+      <EmpleadosCard empleado={empleado} key={empleado.id_empleado} />
     ));
   }
 

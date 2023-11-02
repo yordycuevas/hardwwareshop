@@ -28,11 +28,11 @@ export const EmpleadoContextProvider = ({ children }) => {
     setEmpleados(response.data);
   }
 
-  const deleteEmpleado = async (empleadoid) => {
+  const deleteEmpleado = async (id_empleado) => {
     try {
-      const response = await EliminarEmpleadoRequest(empleadoid);
+      const response = await EliminarEmpleadoRequest(id_empleado);
       setEmpleados(
-        empleados.filter((empleado) => empleado.empleadoid !== empleadoid)
+        empleados.filter((empleado) => empleado.id_empleado !== id_empleado)
       );
       console.log(response);
     } catch (error) {
@@ -49,18 +49,18 @@ export const EmpleadoContextProvider = ({ children }) => {
     }
   };
 
-  const EditarEmpleado = async (empleadoid) => {
+  const EditarEmpleado = async (id_empleado) => {
     try {
-      const response = await EditarEmpleadoRequest(empleadoid);
+      const response = await EditarEmpleadoRequest(id_empleado);
       return response;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const ActualizarEmpleado = async (empleadoid, newFields) => {
+  const ActualizarEmpleado = async (id_empleado, newFields) => {
     try {
-      await ActualizarEmpleadoRequest(empleadoid, newFields);
+      await ActualizarEmpleadoRequest(id_empleado, newFields);
     } catch (error) {
       console.error(error);
     }
