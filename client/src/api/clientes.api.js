@@ -7,6 +7,7 @@ export const obtenerClientesRequest = async () => {
 
 export const CrearClientesRequest = async (data) => {
   await axios.post("http://localhost:4000/clientes", data);
+  console.log(data);
 };
 
 export const EliminarClientesRequest = async (id) => {
@@ -16,6 +17,7 @@ export const EliminarClientesRequest = async (id) => {
 
 export const EditarClienteRequest = async (id) => {
   const response = await axios.get(`http://localhost:4000/clientes/${id}`);
+  console.log(response);
   return response;
 };
 

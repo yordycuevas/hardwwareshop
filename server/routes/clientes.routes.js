@@ -11,12 +11,12 @@ const clientesRoutes = Router();
 
 clientesRoutes.get("/clientes", getClientes);
 
-clientesRoutes.get("/clientes/:id_cliente", getCliente);
+clientesRoutes.get("/clientes/:ID_CLIENTE", getCliente);
 
 clientesRoutes.post("/clientes", createCliente);
 
-clientesRoutes.put("/clientes/:id_cliente", updateCliente);
+clientesRoutes.put("/clientes/:ID_CLIENTE", updateCliente);
 
-clientesRoutes.delete("/clientes/:id_cliente", deleteCliente);
+clientesRoutes.delete("/clientes/:ID_CLIENTE", deleteCliente);
 
 export default clientesRoutes;

@@ -9,27 +9,11 @@ function ClientesCard({ cliente }) {
 
   const imagenUrl = "https://i.pinimg.com/564x/bc/fb/10/bcfb10a0c409974ccd882736385c37b9.jpg";
 
-  const ciudades = {
-    1: "Bogotá",
-    2: "Medellín",
-   3: "Cali",
-   4: "Barranquilla",
-   5: "Cartagena",
-   6: "Bucaramanga",
-   7: "Pereira",
-   8: "Santa Marta",
-   9: "Villavicencio",
-   10: "Cúcuta",
-   11: "Ibagué",
-   12: "Manizales",
-   13: "Neiva",
-   14: "Pasto",
-    15: "Armenia",
-    16: "Popayán",
-    17: "Tunja",
-    18: "Riohacha",
-    19: "Montería",
-    20: "Valledupar",
+  const documento = {
+    1: "Cedula de ciudadania",
+    2: "Tarjeta de identidad",
+    3: "Cedula de extranjeria",
+    4: "Pasaporte",
     // Agrega más ciudades si es necesario
   };
   
@@ -39,25 +23,24 @@ function ClientesCard({ cliente }) {
     <div className="bg-green-300 rounded-md p-4" >
     <img
           src={imagenUrl} 
-          alt={`${cliente.nombre} ${cliente.apellido}`}
+          alt={`${cliente.NOMBRE} ${cliente.APELLIDO}`}
           className="mx-auto rounded-full border-4 border-white"
           style={{ width: "200px", height: "200px" }}
         />
       <h2 className="text-4xl font-bold text-center p-6" >
-        {cliente.nombre} {cliente.apellido}
+        {cliente.NOMBRE} {cliente.APELLIDO}
       </h2>
       <div className="text-left ">
         
-      <p>{cliente.tipo_documento} {cliente.numero_documento}</p>
-      <p>Direccion de contacto: {cliente.direccion}</p>
-      <p>Numero de celular: {cliente.telefono}</p>
-      <p>Correo de contacto: {cliente.email}</p>
-      <p>{ciudades[cliente.id_ciudad]}</p> {/* Mostrar el nombre de la ciudad */}
+      <p>{documento[cliente.ID_DOCUMENTO]} {cliente.ID_CLIENTE}</p>
+      <p>Direccion de contacto: {cliente.DIRECCION}</p>
+      <p>Numero de celular: {cliente.TELEFONO}</p>
+      <p>Correo de contacto: {cliente.CORREO}</p>
       </div>
 
       <div className="flex gap-2 mt-6">
-      <button className="bg-blue-600 px-2 py-1 text-white rounded-md font-medium "  onClick={( ) => navigate(`/editCliente/${cliente.id_cliente}`)} >Editar</button>
-      <button className="bg-red-500 px-2 py-1 text-white rounded-md font-medium " onClick={() => deleteClientes(cliente.id_cliente)}>
+      <button className="bg-blue-600 px-2 py-1 text-white rounded-md font-medium "  onClick={( ) => navigate(`/editCliente/${cliente.ID_CLIENTE}`)} >Editar</button>
+      <button className="bg-red-500 px-2 py-1 text-white rounded-md font-medium " onClick={() => deleteClientes(cliente.ID_CLIENTE)}>
         Eliminar
       </button>
       </div>
@@ -68,15 +51,15 @@ function ClientesCard({ cliente }) {
 
 ClientesCard.propTypes = {
   cliente: PropTypes.shape({
-    id_cliente: PropTypes.number.isRequired,
-    nombre: PropTypes.string.isRequired,
-    apellido: PropTypes.string.isRequired,
-    tipo_documento: PropTypes.string.isRequired,
-    numero_documento: PropTypes.string.isRequired,
-    direccion: PropTypes.string.isRequired,
-    telefono: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id_ciudad: PropTypes.number.isRequired,
+    ID_CLIENTE: PropTypes.string.isRequired,
+    NOMBRE: PropTypes.string.isRequired,
+    APELLIDO: PropTypes.string.isRequired,
+    TELEFONO: PropTypes.string.isRequired,
+    DIRECCION: PropTypes.string.isRequired,
+    ID_DOCUMENTO: PropTypes.string.isRequired,
+    CORREO: PropTypes.string.isRequired,
+    FECHA_NACIMIENTO: PropTypes.string.isRequired,
+    ID_GENERO: PropTypes.string.isRequired,
 
   }).isRequired,
 };

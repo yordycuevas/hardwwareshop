@@ -5,5 +5,5 @@ export const pool = createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database:'hardware_project'
+    database:'ferreteria'
 });

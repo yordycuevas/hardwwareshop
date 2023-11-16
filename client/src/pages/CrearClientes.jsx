@@ -7,36 +7,52 @@ import { useEffect, useState } from "react";
 function CrearClientes() {
   const { CrearCliente, EditarCliente, ActualizarCliente } = useClientes();
   const [cliente, setCliente] = useState({
-    nombre: "",
-    apellido: "",
-    tipo_documento: "",
-    numero_documento: "",
-    direccion: "",
-    telefono: "",
-    email: "",
-    id_ciudad: "",
+    ID_CLIENTE: "",
+    NOMBRE: "",
+    APELLIDO: "",
+    TELEFONO: "",
+    DIRECCION: "",
+    ID_DOCUMENTO: "",
+    CORREO: "",
+    FECHA_NACIMIENTO: "",
+    ID_GENERO: ""
   });
   const params = useParams();
   const navigate = useNavigate();
 
+   // Función para formatear la fecha para el campo de entrada de fecha
+   const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+
+    const dateObject = new Date(dateString);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObject.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+  
+
   useEffect(() => {
     const loadCliente = async () => {
-      if (params.id_cliente) {
-        const cliente = await EditarCliente(params.id_cliente);
+      if (params.ID_CLIENTE) {
+        const cliente = await EditarCliente(params.ID_CLIENTE);
         setCliente({
-          nombre: cliente.data.nombre,
-          apellido: cliente.data.apellido,
-          tipo_documento: cliente.data.tipo_documento,
-          numero_documento: cliente.data.numero_documento,
-          direccion: cliente.data.direccion,
-          telefono: cliente.data.telefono,
-          email: cliente.data.email,
-          id_ciudad: cliente.data.id_ciudad,
+          ID_CLIENTE: cliente.data.ID_CLIENTE,
+          NOMBRE: cliente.data.NOMBRE,
+          APELLIDO: cliente.data.APELLIDO,
+          TELEFONO: cliente.data.TELEFONO,
+          DIRECCION: cliente.data.DIRECCION,
+          ID_DOCUMENTO: cliente.data.ID_DOCUMENTO,
+          CORREO: cliente.data.CORREO,
+          FECHA_NACIMIENTO: cliente.data.FECHA_NACIMIENTO,
+          ID_GENERO: cliente.data.ID_GENERO
         });
+        
       }
     };
     loadCliente();
-  }, [params.id_cliente, EditarCliente]);
+  }, [params.ID_CLIENTE, EditarCliente]);
 
   return (
     <div>
@@ -45,21 +61,22 @@ function CrearClientes() {
         enableReinitialize={true}
         onSubmit={async (values) => {
           navigate("/clientes");
-          if (params.id_cliente) {
-            await ActualizarCliente(params.id_cliente, values);
+          if (params.ID_CLIENTE) {
+            await ActualizarCliente(params.ID_CLIENTE, values);
           } else {
             await CrearCliente(values);
           }
 
           setCliente({
-            nombre: "",
-            apellido: "",
-            tipo_documento: "",
-            numero_documento: "",
-            direccion: "",
-            telefono: "",
-            email: "",
-            id_ciudad: "",
+            ID_CLIENTE: "",
+            NOMBRE: "",
+            APELLIDO: "",
+            TELEFONO: "",
+            DIRECCION: "",
+            ID_DOCUMENTO: "",
+            CORREO: "",
+            FECHA_NACIMIENTO: "",
+            ID_GENERO: ""
           });
         }}
       >
@@ -71,117 +88,113 @@ function CrearClientes() {
             className="bg-yellow-300 max-w-md rounded-md p-12  mx-auto"
           >
             <h1 className="text-4xl font-bold u text-center">
-              {params.id_cliente ? "Editar Cliente" : "Crear Cliente"}
+              {params.ID_CLIENTE ? "Editar Cliente" : "Crear Cliente"}
             </h1>
             <h2 className="text-center">
-              {params.id_cliente
+              {params.ID_CLIENTE
                 ? "Solo edita los campos necesarios"
                 : "No olvides llenar todos los campos"}
             </h2>
-
-            <label className="block p-2">Nombre</label>
+            <label className="block p-2">Documento del cliente</label>
             <input
-              type="text"
-              name="nombre"
-              placeholder="escribre tu nombre"
+              type="int"
+              name="ID_CLIENTE"
+              placeholder="escribre el numero de documento del cliente"
               className="text-sm p-2 py-1 rounded-md block w-full"
               onChange={handleChange}
-              value={values.nombre || ""}
-            />
-            <label className="block p-2">Apellido</label>
-            <input
-              type="text"
-              name="apellido"
-              placeholder="escribre tus apellidos"
-              className="text-sm p-2 py-1 rounded-md block w-full"
-              onChange={handleChange}
-              value={values.apellido || ""}
+              value={values.ID_CLIENTE || ""}
             />
             <label className="block p-2">Tipo de documento</label>
             <select
-              name="tipo_documento"
+              name="ID_DOCUMENTO"
               className="text-sm p-2 py-1 rounded-md block w-full"
               onChange={handleChange}
-              value={values.tipo_documento || ""}
+              value={values.ID_DOCUMENTO || ""}
             >
               <option value="" disabled hidden>
                 Selecciona tu tipo de documento
               </option>
-              <option value="CC">Cédula de Ciudadanía</option>
-              <option value="TI">Tarjeta de Identidad</option>
-              <option value="CE">Cédula de Extranjería</option>
-              <option value="PAS">Pasaporte</option>
+              <option value="1">Cédula de Ciudadanía</option>
+              <option value="2">Tarjeta de Identidad</option>
+              <option value="3">Cédula de Extranjería</option>
+              <option value="4">Pasaporte</option>
               {/* Agrega más opciones según sea necesario */}
             </select>
-
-            <label className="block p-2">Numero de documento</label>
+            <label className="block p-2">Nombre</label>
             <input
               type="text"
-              name="numero_documento"
+              name="NOMBRE"
+              placeholder="escribre tu nombre"
               className="text-sm p-2 py-1 rounded-md block w-full"
-              placeholder="escribre tu numero de documento"
               onChange={handleChange}
-              value={values.numero_documento || ""}
+              value={values.NOMBRE || ""}
+            />
+            <label className="block p-2">Apellido</label>
+            <input
+              type="text"
+              name="APELLIDO"
+              placeholder="escribre tus apellidos"
+              className="text-sm p-2 py-1 rounded-md block w-full"
+              onChange={handleChange}
+              value={values.APELLIDO || ""}
+            />
+            <label className="block p-2">Telefono</label>
+            <input
+              type="number"
+              name="TELEFONO"
+              className="text-sm p-2 py-1 rounded-md block w-full"
+              placeholder="escribre tu numero de celular"
+              onChange={handleChange}
+              value={values.TELEFONO || ""}
             />
             <label className="block p-2">Dirección</label>
             <input
               type="text"
-              name="direccion"
+              name="DIRECCION"
               className="text-sm p-2 py-1 rounded-md block w-full"
               placeholder="escribre tu direccion"
               onChange={handleChange}
-              value={values.direccion || ""}
+              value={values.DIRECCION || ""}
             />
-
-            <label className="block p-2">Telefono</label>
-            <input
-              type="number"
-              name="telefono"
-              className="text-sm p-2 py-1 rounded-md block w-full"
-              placeholder="escribre tu numero de celular"
-              onChange={handleChange}
-              value={values.telefono || ""}
-            />
-            <label className="block p-2">email</label>
+            <label className="block p-2">Email</label>
             <input
               type="text"
-              name="email"
+              name="CORREO"
               className="text-sm p-2 py-1 rounded-md block w-full"
               placeholder="prueba@prueba.com"
               onChange={handleChange}
-              value={values.email || ""}
+              value={values.CORREO || ""}
             />
+            
+            <label className="block p-2">Fecha de nacimiento</label>
+      <input
+        type="date"
+        name="FECHA_NACIMIENTO"
+        className="text-sm p-2 py-1 rounded-md block w-full"
+        onChange={(e) => {
+          const selectedDate = e.target.value;
+          const [year, month, day] = selectedDate.split("-");
+          const formattedDate = `${year}-${month}-${day}`;
+          handleChange({ target: { name: "FECHA_NACIMIENTO", value: formattedDate } });
+        }}
+        value={formatDateForInput(values.FECHA_NACIMIENTO) || ""}
+      />
 
-            <label className="block p-2">Ciudades</label>
+            <label className="block p-2">Genero</label>
             <select
-              name="id_ciudad"
+              name="ID_GENERO"
               className="text-sm p-2 py-1 rounded-md block w-full"
               onChange={handleChange}
-              value={values.id_ciudad || ""}
+              value={values.ID_GENERO || ""}
             >
               <option value="" disabled hidden>
-                Selecciona la ciudad
+                Selecciona su genero
               </option>
-              <option value="1">Bogotá</option>
-              <option value="2">Medellín</option>
-              <option value="3">Cali</option>
-              <option value="4">Barranquilla</option>
-              <option value="5">Cartagena</option>
-              <option value="6">Bucaramanga</option>
-              <option value="7">Pereira</option>
-              <option value="8">Santa Marta</option>
-              <option value="9">Villavicencio</option>
-              <option value="10">Cúcuta</option>
-              <option value="11">Ibagué</option>
-              <option value="12">Manizales</option>
-              <option value="13">Neiva</option>
-              <option value="14">Pasto</option>
-              <option value="15">Armenia</option>
-              <option value="16">Popayán</option>
-              <option value="17">Tunja</option>
-              <option value="18">Riohacha</option>
-              <option value="19">Montería</option>
-              <option value="20">Valledupar</option>
+              <option value="1">Masculino</option>
+              <option value="2">Femenino</option>
+              <option value="3">No binario</option>
+              <option value="4">Prefiero no decirlo</option>
+             
 
               {/* Agrega más opciones según sea necesario */}
             </select>

@@ -11,11 +11,11 @@ function ClientesPage() {
 
   function renderClientes() {
     if (clientes.length === 0) {
-      return <p className="text-5xl font-bold bg-yellow-500 font text-center p-8  ">No hay clientes agregados</p>;
+      return <p className="text-5xl font-bold bg-yellow-500 font text-center p-8  mx-auto ">No hay clientes agregados</p>;
     }
 
     return clientes.map((cliente) => (
-      <ClientesCard cliente={cliente} key={cliente.id_cliente} />
+      <ClientesCard cliente={cliente} key={cliente.ID_CLIENTE} />
     ));
   }
 

@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import ClientesPage from "./pages/ClientesPage";
 import CrearClientes from "./pages/CrearClientes";
-import EmpleadosPage from "./pages/EmpleadosPage";
-import CrearEmpleados from "./pages/CrearEmpleado";
+import ProveedoresPage from "./pages/ProveedoresPage";
+import CrearProveedores from "./pages/CrearProveedor";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import { ClienteContextProvider } from "./context/ClienteProvider";
-import { EmpleadoContextProvider } from "./context/EmpleadoProvider";
+import { ProveedorContextProvider } from "./context/ProveedorProvider";
 import "./index.css";
 
 import Navbar from "./components/Navbar";
@@ -17,21 +17,21 @@ function App() {
         <Navbar />
       <div className="container mx-auto py-4 px-12">
       <ClienteContextProvider>
-      <EmpleadoContextProvider>
+      <ProveedorContextProvider>
 
         <Routes>
           <Route path="/clientes" element={<ClientesPage />} />
           <Route path="/newCliente" element={<CrearClientes />} />
-          <Route path="/editCliente/:id_cliente" element={<CrearClientes />} />
+          <Route path="/editCliente/:ID_CLIENTE" element={<CrearClientes />} />
 
-          <Route path="/empleados" element={<EmpleadosPage />} />
-          <Route path="/newEmpleado" element={<CrearEmpleados />} />
-          <Route path="/editEmpleado/:id_empleado" element={<CrearEmpleados />} />
+          <Route path="/proveedores" element={<ProveedoresPage />} />
+          <Route path="/newProveedor" element={<CrearProveedores />} />
+          <Route path="/editProveedor/:NIT_PROVEEDORES" element={<CrearProveedores />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-      </EmpleadoContextProvider>
+      </ProveedorContextProvider>
       </ClienteContextProvider>
       </div>
         <Footer />

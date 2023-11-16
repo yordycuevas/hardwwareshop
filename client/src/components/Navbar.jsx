@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <div className= "bg-teal-500 flex justify-between px-20 py-8" >
       <Link to="/clientes" className="text-6xl font-bold text-white tracking-tighter ">
-      <h1 > Hardware Shop</h1>
+      <h1 >Ferreteria</h1>
       </Link>
       <ul className="flex gap-x-2">
         <li className="text-xl font-bold " >
@@ -15,10 +15,10 @@ function Navbar() {
         </li>
 
         <li className="text-xl font-bold " >
-          <Link to="/empleados" className="bg-yellow-300 px-4 py-2 rounded-md "> Listado de Empleados </Link>
+          <Link to="/proveedores" className="bg-yellow-300 px-4 py-2 rounded-md "> Listado de Proveedores </Link>
         </li>
         <li className="text-xl font-bold">
-          <Link to="/newEmpleado" className="bg-yellow-300 px-4 py-2 rounded-md "> Crear Empleados </Link>
+          <Link to="/newProveedor" className="bg-yellow-300 px-4 py-2 rounded-md "> Crear Proveedores </Link>
         </li>
       </ul>
     </div>

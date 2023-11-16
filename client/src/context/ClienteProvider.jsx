@@ -28,11 +28,11 @@ export const ClienteContextProvider = ({ children }) => {
     setClientes(response.data);
   }
 
-  const deleteClientes = async (id_cliente) => {
+  const deleteClientes = async (ID_CLIENTE) => {
     try {
-      const response = await EliminarClientesRequest(id_cliente);
+      const response = await EliminarClientesRequest(ID_CLIENTE);
       setClientes(
-        clientes.filter((cliente) => cliente.id_cliente !== id_cliente)
+        clientes.filter((cliente) => cliente.ID_CLIENTE !== ID_CLIENTE)
       );
       console.log(response);
     } catch (error) {
@@ -49,18 +49,18 @@ export const ClienteContextProvider = ({ children }) => {
     }
   };
 
-  const EditarCliente = async (id_cliente) => {
+  const EditarCliente = async (ID_CLIENTE) => {
     try {
-      const response = await EditarClienteRequest(id_cliente);
+      const response = await EditarClienteRequest(ID_CLIENTE);
       return response;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const ActualizarCliente = async (id_cliente, newFields) => {
+  const ActualizarCliente = async (ID_CLIENTE, newFields) => {
     try {
-      await ActualizarClienteRequest(id_cliente, newFields);
+      await ActualizarClienteRequest(ID_CLIENTE, newFields);
     } catch (error) {
       console.error(error);
     }
